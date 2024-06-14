@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   tmp.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skohtake <skohtake@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 12:39:30 by skohtake          #+#    #+#             */
-/*   Updated: 2024/06/14 11:06:09 by skohtake         ###   ########.fr       */
+/*   Created: 2024/06/14 11:05:33 by skohtake          #+#    #+#             */
+/*   Updated: 2024/06/14 11:26:33 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef TMP_H
+# define TMP_H
 
-# include <stdlib.h>
-# include <unistd.h>
+# include "../get_next_line.h"
+# include <stdio.h>
 
-//	get_next_line.c
-char	*get_next_line(int fd);
+typedef struct s_string
+{
+	char	*str;
+	size_t	len;
+	size_t	capa;
+}			t_string;
 
-// get_next_line_utils.c
+int			my_getchar(int fd);
+int			ft_putc(t_string *str, char c);
+char		*get_next_line(int fd);
 
 #endif
