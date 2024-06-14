@@ -12,10 +12,6 @@
 
 #include "tmp.h"
 
-int		my_getchar(int fd);
-int		ft_putc(t_string *str, char c);
-char	*gnl_practice(int fd);
-
 int	main(void)
 {
 	int		fd;
