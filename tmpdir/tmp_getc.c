@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:22:25 by skohtake          #+#    #+#             */
-/*   Updated: 2024/06/18 10:39:01 by skohtake         ###   ########.fr       */
+/*   Updated: 2024/06/18 12:34:24 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	my_putc(t_string *str, char c)
 	return (0);
 }
 
-char	*tmp_get_next_line(int fd)
+char	*gnl_practice(int fd)
 {
 	t_string	ret;
 	char		c;
