@@ -6,15 +6,11 @@
 /*   By: skohtake <skohtake@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:22:25 by skohtake          #+#    #+#             */
-/*   Updated: 2024/06/14 12:00:46 by skohtake         ###   ########.fr       */
+/*   Updated: 2024/06/18 10:39:01 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tmp.h"
-
-int		my_getchar(int fd);
-int		ft_putc(t_string *str, char c);
-char	*get_next_line(int fd);
 
 int	main(void)
 {
@@ -55,7 +51,7 @@ int	my_putc(t_string *str, char c)
 	return (0);
 }
 
-char	*get_next_line(int fd)
+char	*tmp_get_next_line(int fd)
 {
 	t_string	ret;
 	char		c;
