@@ -2,7 +2,7 @@
 
 void	static_test(void)
 {
-	static int	si;
+	static int	si = 10; //	static int	si;
 
 	printf("si = %d\n", ++si);
 	return ;
