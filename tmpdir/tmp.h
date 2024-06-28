@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 11:05:33 by skohtake          #+#    #+#             */
-/*   Updated: 2024/06/23 12:02:06 by skohtake         ###   ########.fr       */
+/*   Updated: 2024/06/28 13:40:13 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "../get_next_line.h"
 # include <stdio.h>
 
+# define BUFFER_SIZE 42
+
 typedef struct s_string
 {
 	char	*str;
@@ -23,7 +25,7 @@ typedef struct s_string
 	size_t	capa;
 }			t_string;
 
-int			my_getchar(int fd);
+int			my_getc(int fd);
 int			my_putc(t_string *str, char c);
 char		*get_next_line(int fd);
 

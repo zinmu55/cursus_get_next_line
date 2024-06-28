@@ -6,25 +6,42 @@
 /*   By: skohtake <skohtake@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:22:25 by skohtake          #+#    #+#             */
-/*   Updated: 2024/06/23 14:51:41 by skohtake         ###   ########.fr       */
+/*   Updated: 2024/06/28 13:52:14 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tmp.h"
 
-int	main(void)
+int	my_putc(t_string *str, char c)
 {
-	int		fd;
-	char	c1;
-	char	c2;
-
-	fd = 0;
-	c1 = my_getchar(fd);
-	c2 = my_getchar(fd);
-	printf("my_getchar returns\n");
-	printf("c1: >>> int:%d, char:%c\n", c1, c1);
-	printf("c2: >>> int:%d, char:%c\n", c2, c2);
+	if (str->len + 1 > str->capa)
+	{
+	}
+	str->str[str->len] = c;
+	str->len++;
 	return (0);
+}
+
+int	my_getc(int fd)
+{
+	static char	buf[BUFFER_SIZE]; // static char	buf[BUFSIZ];
+	static char	*bufp;
+	static int	i = 0;
+
+	if (i == 0)
+	{
+		i = read(fd, buf, sizeof buf); // sizeof buf = 42byte
+		//	read fd to memorize from buf for sizeof buf byte
+		bufp = buf; //	bufp is the head of buf area
+	}
+	if (--i >= 0)
+	{
+		return ((unsigned char)*bufp++);
+	}
+	else
+	{
+		return (EOF);
+	}
 }
 
 char	*gnl_practice(int fd)
@@ -37,7 +54,7 @@ char	*gnl_practice(int fd)
 	ret.capa = 0;
 	while (1)
 	{
-		c = my_getchar(fd);
+		c = my_getc(fd);
 		if (c == EOF)
 		{
 			break ;
@@ -55,27 +72,22 @@ char	*gnl_practice(int fd)
 	return (ret.str);
 }
 
-int	my_getchar(int fd)
-{
-	static char	buf[BUFFER_SIZE]; // static char	buf[BUFSIZ];
-	static char	*bufp;
-	static int	n = 0;
+////////////
+////main////
+////////////
 
-	if (n == 0)
-	{
-		n = read(fd, buf, sizeof buf);
-		//	read fd to memorize in buf with sizeof buf byte
-		bufp = buf; //	bufp is the head of buf area
-	}
-	return ((--n >= 0) ? (unsigned char)*bufp++ : EOF);
-}
-
-int	my_putc(t_string *str, char c)
+int	main(void)
 {
-	if (str->len + 1 > str->capa)
-	{
-	}
-	str->str[str->len] = c;
-	str->len++;
+	int		fd;
+	char	c1;
+	char	c2;
+
+	fd = open("./tmp.txt", O_RDONLY);
+	c1 = my_getc(fd);
+	c2 = my_getc(fd);
+	close(fd);
+	printf("my_getc returns\n");
+	printf("c1: >>> int:%d, char:%c\n", c1, c1);
+	printf("c2: >>> int:%d, char:%c\n", c2, c2);
 	return (0);
 }
