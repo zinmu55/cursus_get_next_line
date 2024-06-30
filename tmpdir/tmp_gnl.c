@@ -6,21 +6,54 @@
 /*   By: skohtake <skohtake@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:22:25 by skohtake          #+#    #+#             */
-/*   Updated: 2024/06/29 14:08:57 by skohtake         ###   ########.fr       */
+/*   Updated: 2024/06/30 13:26:44 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tmp.h"
 
-int	my_putc(t_string *str, char c)
+void	*my_memcpy(void *dst, const void *src, size_t n)
 {
-	if (str->len + 1 > str->capa)
+	char	*res;
+	char	*input;
+
+	res = (char *)dst;
+	input = (char *)src;
+	if (src == NULL && dst == NULL)
+		return (NULL);
+	while (n--)
 	{
+		*res++ = *input++;
 	}
-	str->str[str->len] = c;
-	str->len++;
+	return (dst);
+}
+
+int	my_putc(t_string *res, char c)
+{
+	char	*new_str;
+
+	new_str = (char *)malloc(sizeof(char) * (res->len + 1));
+	if (new_str == NULL)
+	{
+		return (-1);
+	}
+	my_memcpy(new_str, res->str, res->len);
+	new_str[res->len] = c;
+	free(res->str);
+	res->len++;
+	res->str = new_str;
 	return (0);
 }
+
+// int	my_putc(t_string *str, char c)
+// {
+// 	if (str->len + 1 > str->capa)
+// 	{
+// 	}
+// 	str->str[str->len] = c;
+// 	str->len++;
+// 	return (0);
+// }
 
 int	my_getc(int fd)
 {
@@ -107,19 +140,19 @@ char	*gnl_practice(int fd)
 
 int	main(void)
 {
-	int		fd;
-	char	c1;
-	char	c2;
+	int	fd;
 
+	// char	c1;
+	// char	c2;
+	// fd = open("./tmp.txt", O_RDONLY);
+	// c1 = my_getc(fd);
+	// c2 = my_getc(fd);
+	// close(fd);
+	// printf("my_getc returns\n");
+	// printf("c1: >>> int:%d, char:%c\n", c1, c1);
+	// printf("c2: >>> int:%d, char:%c\n", c2, c2);
 	fd = open("./tmp.txt", O_RDONLY);
-	c1 = my_getc(fd);
-	c2 = my_getc(fd);
-	close(fd);
-	printf("my_getc returns\n");
-	printf("c1: >>> int:%d, char:%c\n", c1, c1);
-	printf("c2: >>> int:%d, char:%c\n", c2, c2);
-	fd = open("./tmp.txt", O_RDONLY);
-	printf("gnl returns:%s\n", gnl_practice(fd));
+	printf("gnl returns	:%s\n", gnl_practice(fd));
 	close(fd);
 	return (0);
 }
