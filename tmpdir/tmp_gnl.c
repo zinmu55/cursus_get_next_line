@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tmp_gnl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skohtake <skohtake@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:22:25 by skohtake          #+#    #+#             */
-/*   Updated: 2024/06/30 13:26:44 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/01/18 15:12:40 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ int	main(void)
 	// printf("c1: >>> int:%d, char:%c\n", c1, c1);
 	// printf("c2: >>> int:%d, char:%c\n", c2, c2);
 	fd = open("./tmp.txt", O_RDONLY);
+	printf("gnl returns	:%s\n", gnl_practice(fd));
 	printf("gnl returns	:%s\n", gnl_practice(fd));
 	close(fd);
 	return (0);
