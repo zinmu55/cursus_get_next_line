@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skohtake <skohtake@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:41:41 by skohtake          #+#    #+#             */
-/*   Updated: 2024/06/13 12:41:42 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/04/12 14:14:20 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

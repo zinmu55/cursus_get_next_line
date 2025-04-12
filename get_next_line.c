@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:34:22 by skohtake          #+#    #+#             */
-/*   Updated: 2025/02/08 19:13:56 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/04/12 13:41:14 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char	*get_next_line(int fd)
 {
 	char	*result;
 	char	c;
-
 
 	while (1)
 	{
@@ -48,7 +47,6 @@ char	ft_get(int fd)
 		read_byte = read(fd, buff, BUFFERSIZE);
 		buffptr = buff;
 	}
-
 	read_byte--;
 	if (read_byte >= 0)
 	{
@@ -85,4 +83,3 @@ int	main(void)
 	close(fd);
 	return (0);
 }
-
