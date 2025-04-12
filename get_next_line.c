@@ -6,16 +6,16 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:34:22 by skohtake          #+#    #+#             */
-/*   Updated: 2025/04/12 13:41:14 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/04/12 15:15:40 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-__attribute__((destructor)) static void destructor()
-{
-	system("leaks -q a.out");
-}
+// __attribute__((destructor)) static void destructor()
+// {
+// 	system("leaks -q a.out");
+// }
 
 char	*get_next_line(int fd)
 {
@@ -37,14 +37,14 @@ char	*get_next_line(int fd)
 
 char	ft_get(int fd)
 {
-	static char	buff[BUFFERSIZE];
+	static char	buff[BUFFER_SIZE];
 	static char	*buffptr;
 	static int	read_byte;
 	char		c;
 
 	if (read_byte == 0)
 	{
-		read_byte = read(fd, buff, BUFFERSIZE);
+		read_byte = read(fd, buff, BUFFER_SIZE);
 		buffptr = buff;
 	}
 	read_byte--;
@@ -58,6 +58,39 @@ char	ft_get(int fd)
 		c = EOF;
 	}
 	return (c);
+}
+
+int	my_putc(t_string *res, char c)
+{
+	char	*new_str;
+
+	new_str = (char *)malloc(sizeof(char) * (res->len + 1));
+	if (new_str == NULL)
+	{
+		return (-1);
+	}
+	my_memcpy(new_str, res->str, res->len);
+	new_str[res->len] = c;
+	free(res->str);
+	res->len++;
+	res->str = new_str;
+	return (0);
+}
+
+void	*my_memcpy(void *dst, const void *src, size_t n)
+{
+	char	*res;
+	char	*input;
+
+	res = (char *)dst;
+	input = (char *)src;
+	if (src == NULL && dst == NULL)
+		return (NULL);
+	while (n--)
+	{
+		*res++ = *input++;
+	}
+	return (dst);
 }
 
 ////////////
