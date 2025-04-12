@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:39:30 by skohtake          #+#    #+#             */
-/*   Updated: 2025/04/12 15:15:26 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/04/12 15:30:58 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 //	get_next_line.c
 
 char		*get_next_line(int fd);
-char		ft_getc(int fd);
-int			ft_putc(char *str, char c);
+char		my_getc(int fd);
+int			my_putc(char *str, char c);
 void		*my_memcpy(void *dst, const void *src, size_t n);
 
 typedef struct s_string

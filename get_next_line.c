@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:34:22 by skohtake          #+#    #+#             */
-/*   Updated: 2025/04/12 15:15:40 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/04/12 15:52:17 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,23 @@
 // 	system("leaks -q a.out");
 // }
 
-char	*get_next_line(int fd)
+void	*my_memcpy(void *dst, const void *src, size_t n)
 {
-	char	*result;
-	char	c;
+	char	*res;
+	char	*input;
 
-	while (1)
+	res = (char *)dst;
+	input = (char *)src;
+	if (src == NULL && dst == NULL)
+		return (NULL);
+	while (n--)
 	{
-		c = ft_getc(fd);
-		if (c == EOF)
-			break ;
-		ft_putc(&result, c);
-		if (c == '\n')
-			break ;
+		*res++ = *input++;
 	}
-	ft_putc(&result, c);
-	return (result);
+	return (dst);
 }
 
-char	ft_get(int fd)
+char	my_get(int fd)
 {
 	static char	buff[BUFFER_SIZE];
 	static char	*buffptr;
@@ -77,20 +75,22 @@ int	my_putc(t_string *res, char c)
 	return (0);
 }
 
-void	*my_memcpy(void *dst, const void *src, size_t n)
+char	*get_next_line(int fd)
 {
-	char	*res;
-	char	*input;
+	char	*result;
+	char	c;
 
-	res = (char *)dst;
-	input = (char *)src;
-	if (src == NULL && dst == NULL)
-		return (NULL);
-	while (n--)
+	while (1)
 	{
-		*res++ = *input++;
+		c = my_getc(fd);
+		if (c == EOF)
+			break ;
+		my_putc(result, c);
+		if (c == '\n')
+			break ;
 	}
-	return (dst);
+	my_putc(result, c);
+	return (result);
 }
 
 ////////////
