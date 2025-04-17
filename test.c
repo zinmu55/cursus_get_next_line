@@ -1,21 +1,29 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 12:34:22 by skohtake          #+#    #+#             */
-/*   Updated: 2025/04/12 15:52:17 by skohtake         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include "get_next_line.h"
 
-// __attribute__((destructor)) static void destructor()
-// {
-// 	system("leaks -q a.out");
-// }
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+typedef struct s_string
+{
+	char	*str;
+	size_t	len;
+	size_t	capa;
+}			t_string;
+
+// must comment out below
+
+# define BUFFER_SIZE 42
+
+// must comment out upon
+
+//	get_next_line.c
+
+char		*get_next_line(int fd);
+char		my_getc(int fd);
+int			my_putc(t_string *str, char c);
+void		*my_memcpy(void *dst, const void *src, size_t n);
 
 void	*my_memcpy(void *dst, const void *src, size_t n)
 {

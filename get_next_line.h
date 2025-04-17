@@ -18,19 +18,19 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-//	get_next_line.c
-
-char		*get_next_line(int fd);
-char		my_getc(int fd);
-int			my_putc(char *str, char c);
-void		*my_memcpy(void *dst, const void *src, size_t n);
-
 typedef struct s_string
 {
 	char	*str;
 	size_t	len;
 	size_t	capa;
 }			t_string;
+
+//	get_next_line.c
+
+char		*get_next_line(int fd);
+char		my_getc(int fd);
+int			my_putc(t_string *str, char c);
+void		*my_memcpy(void *dst, const void *src, size_t n);
 
 // get_next_line_utils.c
 
