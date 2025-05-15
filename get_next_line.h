@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:39:30 by skohtake          #+#    #+#             */
-/*   Updated: 2025/04/12 15:30:58 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:43:31 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ typedef struct s_string
 {
 	char	*str;
 	size_t	len;
-	size_t	capa;
+	// size_t	capa;
 }			t_string;
 
-//	get_next_line.c
+// //	get_next_line.c
 
-char		*get_next_line(int fd);
-char		my_getc(int fd);
-int			my_putc(t_string *str, char c);
-void		*my_memcpy(void *dst, const void *src, size_t n);
+// char		*get_next_line(int fd);
+// char		my_getc(int fd);
+// int			my_putc(t_string *str, char c);
+// void		*my_memcpy(void *dst, const void *src, size_t n);
 
-// get_next_line_utils.c
+// // get_next_line_utils.c
 
 // must comment out below
 
-# define BUFFER_SIZE 42
+# define BUFFER_SIZE 2
 
 // must comment out upon
 

@@ -6,113 +6,216 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:34:22 by skohtake          #+#    #+#             */
-/*   Updated: 2025/04/12 15:52:17 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:48:19 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-// __attribute__((destructor)) static void destructor()
-// {
-// 	system("leaks -q a.out");
-// }
-
-void	*my_memcpy(void *dst, const void *src, size_t n)
+size_t	my_strlen(const char *s)
 {
-	char	*res;
-	char	*input;
+	size_t	len;
 
-	res = (char *)dst;
-	input = (char *)src;
-	if (src == NULL && dst == NULL)
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	return (len);
+}
+
+char	*my_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
 		return (NULL);
-	while (n--)
+	while (s[i] != '\0')
 	{
-		*res++ = *input++;
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i++;
 	}
-	return (dst);
+	if (c == '\0')
+		return ((char *)&s[i]);
+	return (NULL);
 }
 
-char	my_getc(int fd)
+static char	*my_initialize(char *s1)
 {
-	static char	buff[BUFFER_SIZE];
-	static char	*buffptr;
-	static int	read_byte;
-	char		c;
-
-	if (read_byte == 0)
+	if (!s1)
 	{
-		read_byte = read(fd, buff, BUFFER_SIZE);
-		buffptr = buff;
+		s1 = (char *)malloc(sizeof(char) * 1);
+		if (!s1)
+			return (NULL);
+		s1[0] = '\0';
 	}
-	read_byte--;
-	if (read_byte >= 0)
-	{
-		c = *buffptr;
-		buffptr++;
-	}
-	if (read_byte < 0)
-	{
-		c = EOF;
-	}
-	return (c);
+	return (s1);
 }
 
-int	my_putc(t_string *res, char c)
+char	*my_strjoin(char *s1, char *s2)
 {
-	char	*new_str;
+	char	*p;
+	size_t	i;
+	size_t	j;
 
-	new_str = (char *)malloc(sizeof(char) * (res->len + 1));
-	if (new_str == NULL)
+	s1 = my_initialize(s1);
+	if (!s1 || !s2)
+		return (free(s1), NULL);
+	p = (char *)malloc(sizeof(char) * (my_strlen(s1) + my_strlen(s2) + 1));
+	if (!p)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0')
 	{
-		return (-1);
+		p[i] = s1[i];
+		i++;
 	}
-	my_memcpy(new_str, res->str, res->len);
-	new_str[res->len] = c;
-	free(res->str);
-	res->len++;
-	res->str = new_str;
-	return (0);
+	while (s2[j] != '\0')
+		p[i++] = s2[j++];
+	p[i] = '\0';
+	free(s1);
+	return (p);
 }
 
-char	*get_next_line(int fd)
+// utils above
+char	*my_save(char *save)
 {
-	t_string	*result;
-	char	c;
+	int		i;
+	int		j;
+	char	*new_save;
 
-	while (1)
+	if (!save || !*save)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (save[i] && save[i] != '\n')
+		i++;
+	if ((!save[i]))
+		return (free(save), NULL);
+	// {
+	// 	free(save);
+	// 	save = NULL;
+	// 	return (NULL);
+	// }
+	new_save = (char *)malloc(sizeof(char) * (my_strlen(save) - i + 1));
+	if (!new_save)
+		return (free(save), NULL);
+	// {
+	// 	free(save);
+	// 	save = NULL;
+	// 	return (NULL);
+	// }
+	i++;
+	while (save[i])
+		new_save[j++] = save[i++];
+	new_save[j] = '\0';
+	free(save);
+	return (new_save);
+}
+
+char	*my_get_line(char *save)
+{
+	char	*line;
+	int		i;
+
+	i = 0;
+	if (!save)
+		return (NULL);
+	while (save[i] != '\n' && save[i])
+		i++;
+	line = (char *)malloc(sizeof(char) * (i + 2));
+	if(!line)
+		return(NULL);
+	i = 0;
+	while (save[i] && save[i] != '\n')
 	{
-		c = my_getc(fd);
-		if (c == EOF)
-			break ;
-		my_putc(result, c);
-		if (c == '\n')
-			break ;
+		line[i] = save[i];
+		i++;
 	}
-	my_putc(result, c);
-	return (result->str);
+	if (save[i] == '\n')
+		line[i++] = '\n';
+	line[i] = '\0';
+	return (line);
+}
+
+char	*my_read(int fd, char *save)
+{
+	char	*tmp;
+	char	*new_save;
+	int		readbyte;
+
+	tmp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (tmp == NULL)
+		return (NULL);
+	readbyte = 1;
+	while (!my_strchr(save, '\n') && readbyte != 0)
+	{
+		readbyte = read(fd, tmp, BUFFER_SIZE);
+		if (readbyte == -1)
+		{
+			free(tmp);
+			return (NULL);
+		}
+		tmp[readbyte] = '\0';
+		new_save = my_strjoin(save, tmp);
+		save = new_save;
+	}
+	free(tmp);
+	return (save);
+}
+
+char	*get_next_line(int fd) //ラインをリターンする
+{
+	char *line;
+	static char *save;
+
+	if (BUFFER_SIZE <= 0)
+		return (NULL);
+	save = my_read(fd, save);
+	if (save == NULL)
+		return (NULL);
+	if (*save == 0)
+	{
+		free(save);
+		save = NULL;
+		line = NULL;
+		return (NULL);
+	}
+	line = my_get_line(save);
+	save = my_save(save);
+	if (save != NULL && *save == 0)
+	{
+		free(save);
+		save = NULL;
+	}
+	return (line);
 }
 
 ////////////
 ////main////
 ////////////
 
+// Mandatory
+#include "get_next_line.h"
+
 int	main(void)
 {
-	int	fd;
+	int		fd;
+	char	*line;
 
-	// char	c1;
-	// char	c2;
-	// fd = open("./tmp.txt", O_RDONLY);
-	// c1 = my_getc(fd);
-	// c2 = my_getc(fd);
-	// close(fd);
-	// printf("my_getc returns\n");
-	// printf("c1: >>> int:%d, char:%c\n", c1, c1);
-	// printf("c2: >>> int:%d, char:%c\n", c2, c2);
-	fd = open("./tmp.txt", O_RDONLY);
-	printf("gnl returns	:%s\n", get_next_line(fd));
-	printf("gnl returns	:%s\n", get_next_line(fd));
-	close(fd);
+	fd = open("./example.txt", O_RDONLY);
+	line = "";
+	if (fd == -1)
+	{
+		fprintf(stdout, "file open error.");
+		return (1);
+	}
+	while (line)
+	{
+		line = get_next_line(fd);
+		printf(">%s", line);
+		free(line);
+	}
 	return (0);
 }
