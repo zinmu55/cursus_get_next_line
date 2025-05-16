@@ -101,29 +101,56 @@ char	*my_read(int fd, char *save)
 char	*get_next_line(int fd) //ラインをリターンする
 {
 	char *line;
-	static char *save;
+	static char *save[FOPEN_MAX];
 
-	if (BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= FOPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
-	save = my_read(fd, save);
-	if (save == NULL)
+	save[fd] = my_read(fd, save[fd]);
+	if (save[fd] == NULL)
 		return (NULL);
-	if (*save == 0)
+	if (*save[fd] == 0)
 	{
-		free(save);
-		save = NULL;
+		free(save[fd]);
+		save[fd] = NULL;
 		line = NULL;
 		return (NULL);
 	}
-	line = my_get_line(save);
-	save = my_save(save);
-	if (save != NULL && *save == 0)
+	line = my_get_line(save[fd]);
+	save[fd] = my_save(save[fd]);
+	if (save[fd] != NULL && *save[fd] == 0)
 	{
-		free(save);
-		save = NULL;
+		free(save[fd]);
+		save[fd] = NULL;
 	}
 	return (line);
 }
+
+// char	*get_next_line(int fd) //ラインをリターンする
+// {
+// 	char *line;
+// 	static char *save;
+
+// 	if (BUFFER_SIZE <= 0)
+// 		return (NULL);
+// 	save = my_read(fd, save);
+// 	if (save == NULL)
+// 		return (NULL);
+// 	if (*save == 0)
+// 	{
+// 		free(save);
+// 		save = NULL;
+// 		line = NULL;
+// 		return (NULL);
+// 	}
+// 	line = my_get_line(save);
+// 	save = my_save(save);
+// 	if (save != NULL && *save == 0)
+// 	{
+// 		free(save);
+// 		save = NULL;
+// 	}
+// 	return (line);
+// }
 
 ////////////
 ////main////
@@ -134,19 +161,23 @@ char	*get_next_line(int fd) //ラインをリターンする
 
 int	main(void)
 {
-	int		fd;
+	int		fd1;
+	int		fd2;
 	char	*line;
 
-	fd = open("./example.txt", O_RDONLY);
+	fd1 = open("./example.txt", O_RDONLY);
+	fd2 = open("./tmp.txt", O_RDONLY);
 	line = "";
-	if (fd == -1)
+	if (fd1 == -1 || fd2 == -1)
 	{
 		fprintf(stdout, "file open error.");
 		return (1);
 	}
 	while (line)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(fd1);
+		printf(">%s", line);
+		line = get_next_line(fd2);
 		printf(">%s", line);
 		free(line);
 	}

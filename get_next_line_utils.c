@@ -40,7 +40,7 @@ char	*my_strchr(const char *s, int c)
 	return (NULL);
 }
 
-static char	*my_initialize(char *s1)
+char	*my_initialize(char *s1)	//if pointer s1 is null, return '\0'.
 {
 	if (!s1)
 	{
@@ -54,26 +54,26 @@ static char	*my_initialize(char *s1)
 
 char	*my_strjoin(char *s1, char *s2)
 {
-	char	*p;
+	char	*res;
 	size_t	i;
 	size_t	j;
 
 	s1 = my_initialize(s1);
 	if (!s1 || !s2)
 		return (free(s1), NULL);
-	p = (char *)malloc(sizeof(char) * (my_strlen(s1) + my_strlen(s2) + 1));
-	if (!p)
+	res = (char *)malloc(sizeof(char) * (my_strlen(s1) + my_strlen(s2) + 1));
+	if (!res)
 		return (NULL);
 	i = 0;
 	j = 0;
 	while (s1[i] != '\0')
 	{
-		p[i] = s1[i];
+		res[i] = s1[i];
 		i++;
 	}
 	while (s2[j] != '\0')
-		p[i++] = s2[j++];
-	p[i] = '\0';
+		res[i++] = s2[j++];
+	res[i] = '\0';
 	free(s1);
-	return (p);
+	return (res);
 }

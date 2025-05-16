@@ -36,7 +36,7 @@ char	*get_next_line(int fd);
 
 size_t	my_strlen(const char *s);
 char	*my_strchr(const char *s, int c);
-static char	*my_initialize(char *s1);
+char	*my_initialize(char *s1);
 char	*my_strjoin(char *s1, char *s2);
 
 // you must comment out below
