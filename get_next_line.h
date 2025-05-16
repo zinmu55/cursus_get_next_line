@@ -25,20 +25,25 @@ typedef struct s_string
 	// size_t	capa;
 }			t_string;
 
-// //	get_next_line.c
+//	get_next_line.c
 
-// char		*get_next_line(int fd);
-// char		my_getc(int fd);
-// int			my_putc(t_string *str, char c);
-// void		*my_memcpy(void *dst, const void *src, size_t n);
+char	*my_save(char *save);
+char	*my_get_line(char *save);
+char	*my_read(int fd, char *save);
+char	*get_next_line(int fd);
 
-// // get_next_line_utils.c
+// get_next_line_utils.c
 
-// must comment out below
+size_t	my_strlen(const char *s);
+char	*my_strchr(const char *s, int c);
+static char	*my_initialize(char *s1);
+char	*my_strjoin(char *s1, char *s2);
+
+// you must comment out below
 
 # define BUFFER_SIZE 2
 
-// must comment out upon
+// you must comment out upon
 
 #endif
 
