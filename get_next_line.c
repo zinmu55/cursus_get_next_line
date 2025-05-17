@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:34:22 by skohtake          #+#    #+#             */
-/*   Updated: 2025/05/17 15:45:36 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:52:42 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,10 @@ char	*my_save(char *save)
 	while (save[i] && save[i] != '\n')
 		i++;
 	if ((!save[i]))
-	// return (free(save), NULL);
-	{
-		free(save);
-		save = NULL;
-		return (NULL);
-	}
+		return (free(save), NULL);
 	new_save = (char *)malloc(sizeof(char) * (my_strlen(save) - i + 1));
 	if (!new_save)
-	// return (free(save), NULL);
-	{
-		free(save);
-		save = NULL;
-		return (NULL);
-	}
+		return (free(save), NULL);
 	i++;
 	while (save[i])
 		new_save[j++] = save[i++];
@@ -98,10 +88,10 @@ char	*my_read(int fd, char *save)
 	return (save);
 }
 
-char	*get_next_line(int fd) //ラインをリターンする
+char	*get_next_line(int fd)
 {
-	char *line;
-	static char *save[FOPEN_MAX];
+	char		*line;
+	static char	*save[FOPEN_MAX];
 
 	if (fd < 0 || fd >= FOPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
