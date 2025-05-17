@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:34:22 by skohtake          #+#    #+#             */
-/*   Updated: 2025/05/11 15:48:19 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:45:36 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*my_save(char *save)
 	while (save[i] && save[i] != '\n')
 		i++;
 	if ((!save[i]))
-		// return (free(save), NULL);
+	// return (free(save), NULL);
 	{
 		free(save);
 		save = NULL;
@@ -33,7 +33,7 @@ char	*my_save(char *save)
 	}
 	new_save = (char *)malloc(sizeof(char) * (my_strlen(save) - i + 1));
 	if (!new_save)
-		// return (free(save), NULL);
+	// return (free(save), NULL);
 	{
 		free(save);
 		save = NULL;
@@ -58,8 +58,8 @@ char	*my_get_line(char *save)
 	while (save[i] != '\n' && save[i])
 		i++;
 	line = (char *)malloc(sizeof(char) * (i + 2));
-	if(!line)
-		return(NULL);
+	if (!line)
+		return (NULL);
 	i = 0;
 	while (save[i] && save[i] != '\n')
 	{
@@ -156,30 +156,30 @@ char	*get_next_line(int fd) //ラインをリターンする
 ////main////
 ////////////
 
-// Mandatory
-#include "get_next_line.h"
+// // Mandatory
+// #include "get_next_line.h"
 
-int	main(void)
-{
-	int		fd1;
-	int		fd2;
-	char	*line;
+// int	main(void)
+// {
+// 	int		fd1;
+// 	int		fd2;
+// 	char	*line;
 
-	fd1 = open("./example.txt", O_RDONLY);
-	fd2 = open("./tmp.txt", O_RDONLY);
-	line = "";
-	if (fd1 == -1 || fd2 == -1)
-	{
-		fprintf(stdout, "file open error.");
-		return (1);
-	}
-	while (line)
-	{
-		line = get_next_line(fd1);
-		printf(">%s", line);
-		line = get_next_line(fd2);
-		printf(">%s", line);
-		free(line);
-	}
-	return (0);
-}
+// 	fd1 = open("./example.txt", O_RDONLY);
+// 	fd2 = open("./tmp.txt", O_RDONLY);
+// 	line = "";
+// 	if (fd1 == -1 || fd2 == -1)
+// 	{
+// 		fprintf(stdout, "file open error.");
+// 		return (1);
+// 	}
+// 	while (line)
+// 	{
+// 		line = get_next_line(fd1);
+// 		printf(">%s", line);
+// 		line = get_next_line(fd2);
+// 		printf(">%s", line);
+// 		free(line);
+// 	}
+// 	return (0);
+// }

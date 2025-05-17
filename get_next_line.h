@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:39:30 by skohtake          #+#    #+#             */
-/*   Updated: 2025/05/11 15:43:31 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:46:04 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,23 @@ typedef struct s_string
 
 //	get_next_line.c
 
-char	*my_save(char *save);
-char	*my_get_line(char *save);
-char	*my_read(int fd, char *save);
-char	*get_next_line(int fd);
+char		*my_save(char *save);
+char		*my_get_line(char *save);
+char		*my_read(int fd, char *save);
+char		*get_next_line(int fd);
 
 // get_next_line_utils.c
 
-size_t	my_strlen(const char *s);
-char	*my_strchr(const char *s, int c);
-char	*my_initialize(char *s1);
-char	*my_strjoin(char *s1, char *s2);
+size_t		my_strlen(const char *s);
+char		*my_strchr(const char *s, int c);
+char		*my_initialize(char *s1);
+char		*my_strjoin(char *s1, char *s2);
 
-// you must comment out below
+// // you must comment out below
 
-# define BUFFER_SIZE 2
+// # define BUFFER_SIZE 2
 
-// you must comment out upon
+// // you must comment out upon
 
 #endif
 
