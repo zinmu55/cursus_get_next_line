@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:34:22 by skohtake          #+#    #+#             */
-/*   Updated: 2025/05/17 15:52:42 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/05/18 12:24:56 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*my_save(char *save)
 {
@@ -70,7 +70,7 @@ char	*my_read(int fd, char *save)
 
 	tmp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (tmp == NULL)
-		return (NULL);
+		return (save);
 	readbyte = 1;
 	while (!my_strchr(save, '\n') && readbyte != 0)
 	{
@@ -78,7 +78,7 @@ char	*my_read(int fd, char *save)
 		if (readbyte == -1)
 		{
 			free(tmp);
-			return (NULL);
+			return (save);
 		}
 		tmp[readbyte] = '\0';
 		new_save = my_strjoin(save, tmp);
@@ -90,8 +90,8 @@ char	*my_read(int fd, char *save)
 
 char	*get_next_line(int fd)
 {
-	char		*line;
-	static char	*save[FOPEN_MAX];
+	char *line;
+	static char *save[FOPEN_MAX];
 
 	if (fd < 0 || fd >= FOPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -114,62 +114,3 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
-
-// char	*get_next_line(int fd) //ラインをリターンする
-// {
-// 	char *line;
-// 	static char *save;
-
-// 	if (BUFFER_SIZE <= 0)
-// 		return (NULL);
-// 	save = my_read(fd, save);
-// 	if (save == NULL)
-// 		return (NULL);
-// 	if (*save == 0)
-// 	{
-// 		free(save);
-// 		save = NULL;
-// 		line = NULL;
-// 		return (NULL);
-// 	}
-// 	line = my_get_line(save);
-// 	save = my_save(save);
-// 	if (save != NULL && *save == 0)
-// 	{
-// 		free(save);
-// 		save = NULL;
-// 	}
-// 	return (line);
-// }
-
-////////////
-////main////
-////////////
-
-// // Mandatory
-// #include "get_next_line.h"
-
-// int	main(void)
-// {
-// 	int		fd1;
-// 	int		fd2;
-// 	char	*line;
-
-// 	fd1 = open("./example.txt", O_RDONLY);
-// 	fd2 = open("./tmp.txt", O_RDONLY);
-// 	line = "";
-// 	if (fd1 == -1 || fd2 == -1)
-// 	{
-// 		fprintf(stdout, "file open error.");
-// 		return (1);
-// 	}
-// 	while (line)
-// 	{
-// 		line = get_next_line(fd1);
-// 		printf(">%s", line);
-// 		line = get_next_line(fd2);
-// 		printf(">%s", line);
-// 		free(line);
-// 	}
-// 	return (0);
-// }
