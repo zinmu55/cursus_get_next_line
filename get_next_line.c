@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:34:22 by skohtake          #+#    #+#             */
-/*   Updated: 2025/05/18 12:15:37 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/05/18 13:43:02 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,30 +146,23 @@ char	*get_next_line(int fd)
 ////main////
 ////////////
 
-// // Mandatory
-// #include "get_next_line.h"
+// Mandatory
 
-// int	main(void)
-// {
-// 	int		fd1;
-// 	int		fd2;
-// 	char	*line;
+int	main(void)
+{
+	int		fd1;
+	int		fd2;
+	char	*line;
 
-// 	fd1 = open("./example.txt", O_RDONLY);
-// 	fd2 = open("./tmp.txt", O_RDONLY);
-// 	line = "";
-// 	if (fd1 == -1 || fd2 == -1)
-// 	{
-// 		fprintf(stdout, "file open error.");
-// 		return (1);
-// 	}
-// 	while (line)
-// 	{
-// 		line = get_next_line(fd1);
-// 		printf(">%s", line);
-// 		line = get_next_line(fd2);
-// 		printf(">%s", line);
-// 		free(line);
-// 	}
-// 	return (0);
-// }
+	fd1 = open("./example.txt", O_RDONLY);
+	fd2 = open("./tmp.txt", O_RDONLY);
+	line = "";
+	while (line)
+	{
+		line = get_next_line(fd1);
+		printf(">%s", line);
+		line = get_next_line(fd2);
+		printf(">%s", line);
+	}
+	return (0);
+}

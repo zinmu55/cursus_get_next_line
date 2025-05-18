@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:41:41 by skohtake          #+#    #+#             */
-/*   Updated: 2025/05/18 12:13:41 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/05/18 13:40:48 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ char	*my_initialize(char *str) //if pointer s1 is null, return '\0'.
 
 char	*my_strjoin(char *s1, char *s2)
 {
-	char *res;
-	size_t i;
-	size_t j;
+	char	*res;
+	size_t	i;
+	size_t	j;
 
 	s1 = my_initialize(s1);
 	s2 = my_initialize(s2);

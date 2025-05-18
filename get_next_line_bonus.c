@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:34:22 by skohtake          #+#    #+#             */
-/*   Updated: 2025/05/18 12:24:56 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/05/18 13:40:26 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ char	*my_read(int fd, char *save)
 
 char	*get_next_line(int fd)
 {
-	char *line;
-	static char *save[FOPEN_MAX];
+	char		*line;
+	static char	*save[FOPEN_MAX];
 
 	if (fd < 0 || fd >= FOPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
