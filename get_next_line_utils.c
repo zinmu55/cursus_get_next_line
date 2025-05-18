@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:41:41 by skohtake          #+#    #+#             */
-/*   Updated: 2025/04/12 14:14:20 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/05/18 12:13:41 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,26 @@ char	*my_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*my_initialize(char *s1)	//if pointer s1 is null, return '\0'.
+char	*my_initialize(char *str) //if pointer s1 is null, return '\0'.
 {
-	if (!s1)
+	if (!str)
 	{
-		s1 = (char *)malloc(sizeof(char) * 1);
-		if (!s1)
+		str = (char *)malloc(sizeof(char) * 1);
+		if (!str)
 			return (NULL);
-		s1[0] = '\0';
+		str[0] = '\0';
 	}
-	return (s1);
+	return (str);
 }
 
 char	*my_strjoin(char *s1, char *s2)
 {
-	char	*res;
-	size_t	i;
-	size_t	j;
+	char *res;
+	size_t i;
+	size_t j;
 
 	s1 = my_initialize(s1);
+	s2 = my_initialize(s2);
 	if (!s1 || !s2)
 		return (free(s1), NULL);
 	res = (char *)malloc(sizeof(char) * (my_strlen(s1) + my_strlen(s2) + 1));

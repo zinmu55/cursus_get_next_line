@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:34:22 by skohtake          #+#    #+#             */
-/*   Updated: 2025/05/17 15:52:42 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/05/18 12:15:37 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*my_read(int fd, char *save)
 
 	tmp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (tmp == NULL)
-		return (NULL);
+		return (save);
 	readbyte = 1;
 	while (!my_strchr(save, '\n') && readbyte != 0)
 	{
@@ -78,7 +78,7 @@ char	*my_read(int fd, char *save)
 		if (readbyte == -1)
 		{
 			free(tmp);
-			return (NULL);
+			return (save);
 		}
 		tmp[readbyte] = '\0';
 		new_save = my_strjoin(save, tmp);
