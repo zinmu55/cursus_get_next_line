@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:34:22 by skohtake          #+#    #+#             */
-/*   Updated: 2025/05/18 13:43:02 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/05/22 10:19:56 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,38 +115,11 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// char	*get_next_line(int fd) //ラインをリターンする
-// {
-// 	char *line;
-// 	static char *save;
-
-// 	if (BUFFER_SIZE <= 0)
-// 		return (NULL);
-// 	save = my_read(fd, save);
-// 	if (save == NULL)
-// 		return (NULL);
-// 	if (*save == 0)
-// 	{
-// 		free(save);
-// 		save = NULL;
-// 		line = NULL;
-// 		return (NULL);
-// 	}
-// 	line = my_get_line(save);
-// 	save = my_save(save);
-// 	if (save != NULL && *save == 0)
-// 	{
-// 		free(save);
-// 		save = NULL;
-// 	}
-// 	return (line);
-// }
+// // you must comment out below
 
 ////////////
 ////main////
 ////////////
-
-// Mandatory
 
 int	main(void)
 {
