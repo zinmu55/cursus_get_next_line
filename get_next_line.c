@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:34:22 by skohtake          #+#    #+#             */
-/*   Updated: 2025/05/22 10:32:27 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:32:49 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,27 +115,60 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// // // you must comment out below
+// you must comment out below
 
-// ////////////
-// ////main////
-// ////////////
+////////////
+////main////
+////////////
 
-// int	main(void)
-// {
-// 	int		fd1;
-// 	int		fd2;
-// 	char	*line;
+int	main(void)
+{
+	int		fd;
+	int		fd1;
+	int		fd2;
+	char	*line;
 
-// 	fd1 = open("./example.txt", O_RDONLY);
-// 	fd2 = open("./tmp.txt", O_RDONLY);
-// 	line = "";
-// 	while (line)
-// 	{
-// 		line = get_next_line(fd1);
-// 		printf(">%s", line);
-// 		line = get_next_line(fd2);
-// 		printf(">%s", line);
-// 	}
-// 	return (0);
-// }
+	fd1 = open("./tmp1.txt", O_RDONLY);
+	fd2 = open("./tmp2.txt", O_RDONLY);
+	line = "";
+	while (line)
+	{
+		fd = fd1;
+		line = get_next_line(fd);
+		printf("	fd:%i>>>%s", fd, line);
+	}
+	printf("\n################################################\n");
+	close(fd1);
+	close(fd2);
+	//////////////////////////////////////////////////
+	fd1 = open("./tmp1.txt", O_RDONLY);
+	fd2 = open("./tmp2.txt", O_RDONLY);
+	line = "";
+	while (line)
+	{
+		fd = fd2;
+		line = get_next_line(fd);
+		printf("	fd:%i>>>%s", fd, line);
+	}
+	printf("\n################################################\n");
+	close(fd1);
+	close(fd2);
+	//////////////////////////////////////////////////
+	fd1 = open("./tmp1.txt", O_RDONLY);
+	fd2 = open("./tmp2.txt", O_RDONLY);
+	line = "";
+	while (line)
+	{
+		fd = fd1;
+		line = get_next_line(fd);
+		printf("	fd:%i>>>%s", fd, line);
+		fd = fd2;
+		line = get_next_line(fd);
+		printf("	fd:%i>>>%s", fd, line);
+	}
+	printf("\n################################################\n");
+	close(fd1);
+	close(fd2);
+	//////////////////////////////////////////////////
+	return (0);
+}
